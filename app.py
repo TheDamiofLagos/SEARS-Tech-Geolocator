@@ -15,7 +15,7 @@ def get_address(lat, lon):
 
 # Streamlit App
 def main():
-    st.title("Geocode CSV: Convert Latitude & Longitude to Address")
+    st.title("Sears Geocode Converter: Convert Tech Punch Latitude & Longitude to Address")
 
     # File uploader for CSV
     uploaded_file = st.file_uploader("Upload your CSV file", type=['csv'])
