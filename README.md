@@ -1,4 +1,4 @@
-# Streamlit Geocoding App
+# SEARS-Tech-Geolocator
 
 This is a **Streamlit web application** that allows users to upload a CSV file containing latitude and longitude columns, converts the coordinates to human-readable addresses using reverse geocoding, and provides the option to download the updated CSV with the address added as a new column.
 
