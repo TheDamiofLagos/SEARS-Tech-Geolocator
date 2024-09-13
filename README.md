@@ -38,19 +38,20 @@ Once deployed on Streamlit Cloud, you can access the live version of the app her
 - **Python 3.x**
 - **Streamlit** for running the web application.
 - **Pandas** for handling CSV file operations.
-- **Geopy** for reverse geocoding latitude and longitude to addresses.
+- **OpenCage** for reverse geocoding latitude and longitude to addresses.
+- **python-dotenv** for managing environment variables.
 
 To install these dependencies manually, you can run:
 
 ```bash
-pip install streamlit pandas geopy
+pip install streamlit pandas opencage python-dotenv
 ```
 
 ## Running the App Locally
 1. Make sure all dependencies are installed.
 2. Run the Streamlit app:
    ```bash
-   streamlit run streamlit_geocode.py
+   streamlit run app.py
    ```
 3. Open a browser and go to http://localhost:8501 to view the app.
 
