@@ -15,7 +15,7 @@ def get_address(lat, lon):
 
 # Streamlit App
 def main():
-    st.title("Sears Geocode Converter: Convert Tech Punch Latitude & Longitude to Address")
+    st.title("Geocode CSV: Convert Latitude & Longitude to Address")
 
     # File uploader for CSV
     uploaded_file = st.file_uploader("Upload your CSV file", type=['csv'])
@@ -24,30 +24,37 @@ def main():
         # Read the CSV file
         df = pd.read_csv(uploaded_file)
 
-        # Convert columns to lowercase for case-insensitive checks
+        # Convert column names to lowercase for case-insensitive checks
         lower_columns = [col.lower() for col in df.columns]
 
-        # Try to find latitude and longitude columns
+        # Detect latitude and longitude columns
         latitude_column = None
         longitude_column = None
-        
+
         for col in lower_columns:
             if "latitude" in col:
                 latitude_column = df.columns[lower_columns.index(col)]
             if "longitude" in col:
                 longitude_column = df.columns[lower_columns.index(col)]
 
-        # Check if both latitude and longitude columns were found
+        # Ensure both latitude and longitude are found
         if latitude_column and longitude_column:
             st.write(f"Detected 'latitude' column: {latitude_column}")
             st.write(f"Detected 'longitude' column: {longitude_column}")
 
+            # Convert all columns except latitude and longitude to strings
+            df = df.applymap(lambda x: str(x) if not pd.api.types.is_numeric_dtype(x) or x.name not in [latitude_column, longitude_column] else x)
+
+            # Ensure latitude and longitude remain numeric
+            df[latitude_column] = pd.to_numeric(df[latitude_column], errors='coerce')
+            df[longitude_column] = pd.to_numeric(df[longitude_column], errors='coerce')
+
             st.write("Preview of uploaded CSV:")
-            st.write(df[[latitude_column, longitude_column]].head())
+            st.write(df.head())
 
             # Progress bar
             progress_bar = st.progress(0)
-            
+
             # Get addresses for each row in the CSV
             addresses = []
             total_rows = len(df)
@@ -55,7 +62,7 @@ def main():
                 lat, lon = row[latitude_column], row[longitude_column]
                 address = get_address(lat, lon)
                 addresses.append(address)
-                
+
                 # Update progress bar
                 progress_bar.progress((index + 1) / total_rows)
 
