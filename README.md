@@ -10,7 +10,7 @@ This is a **Streamlit web application** that allows users to upload a CSV file c
 - Progress bar to indicate processing status.
 
 ## Demo
-Once deployed on Streamlit Cloud, you can access the live version of the app here: [Your App Link]([https://your-app-link.streamlit.app](https://sears-tech-geolocator-v1.streamlit.app/)).
+Once deployed on Streamlit Cloud, you can access the live version of the app here: [Geolocator]([https://your-app-link.streamlit.app](https://sears-tech-geolocator-v1.streamlit.app/)).
 
 ## Installation
 
